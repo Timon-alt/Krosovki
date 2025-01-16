@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.krosovki"
-        minSdk = 30
+        minSdk = 31
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -60,4 +60,6 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     // Шрифты
     implementation(libs.androidx.ui.text.google.fonts)
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
 }
