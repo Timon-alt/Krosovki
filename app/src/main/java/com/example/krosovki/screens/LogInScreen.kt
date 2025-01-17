@@ -95,6 +95,7 @@ fun LogInScreen() {
                     TextButton(
                         onClick = {
                             //Код
+                            //Изменение
                         },
                         modifier = Modifier.align(Alignment.End)
                     ) {
