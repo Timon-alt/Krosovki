@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -36,7 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.example.krosovki.R
 
 @Composable
-fun StartScreen(){
+fun StartScreen(onClick: () -> Unit){
     var currentProgress by remember { mutableStateOf(1) }
     var isVisible by remember { mutableStateOf(false) }
     var counter by remember { mutableStateOf(0) }
@@ -46,17 +47,17 @@ fun StartScreen(){
         R.drawable.noga_two,
         R.drawable.noga_three)
 
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                Brush.linearGradient(
-                    listOf(Color(0xFF48B2E7), Color(0xFF44A9DC), Color(0xFF2B6B8B))
-                )
+    Row(horizontalArrangement = Arrangement.Center,
+        modifier = Modifier.background(
+            Brush.linearGradient(
+                listOf(Color(0xFF48B2E7), Color(0xFF44A9DC), Color(0xFF2B6B8B))
             )
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        )
+        ){
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxSize()) {
             if(!isVisible){
                 Text(text = "ДОБРО ПОЖАЛОВАТЬ",
                     fontWeight = FontWeight.Normal,
@@ -69,14 +70,16 @@ fun StartScreen(){
                 painter = painterResource(listOfImage[counter]),
                 contentDescription = "Che za tyagi"
             )
+            StartScreenText(isVisible, counter)
             SegmentedProgressBar(3, currentProgress)
             Spacer(modifier = Modifier.size(30.dp))
-            StartScreenText(isVisible, counter)
             Button(onClick = {
-                currentProgress++
+                if(currentProgress < 3) currentProgress++
+                else onClick()
                 isVisible = true
-                if(counter != 2) counter++
+                if(counter < 2) counter++
                 buttonText = "Далее"
+
             },
                 shape = RoundedCornerShape(10.dp) ,
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White),
@@ -93,5 +96,5 @@ fun StartScreen(){
 @Preview
 @Composable
 fun PrewviewStartScreen(){
-    StartScreen()
+    StartScreen({})
 }

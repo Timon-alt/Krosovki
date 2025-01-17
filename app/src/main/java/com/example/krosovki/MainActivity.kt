@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.krosovki.controllers.ScrensController
 import com.example.krosovki.screens.StartScreen
 import com.example.krosovki.ui.theme.KrosovkiTheme
 
@@ -14,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
-            KrosovkiTheme { StartScreen() }
+            KrosovkiTheme { ScrensController() }
         }
     }
 }

@@ -62,4 +62,6 @@ dependencies {
     implementation(libs.androidx.ui.text.google.fonts)
     // Splash Screen
     implementation(libs.androidx.core.splashscreen)
+    // Screen Navigation
+    implementation(libs.androidx.navigation.compose)
 }

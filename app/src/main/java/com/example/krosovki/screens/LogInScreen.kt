@@ -1,5 +1,7 @@
 package com.example.krosovki.screens
 
+import RadioButtonSingleSelection
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,32 +29,58 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.krosovki.R
 
 @Composable
-fun LogInScreen() {
+fun LogInScreen(onClick: () -> Unit) {
+    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
+    var isVisible by remember { mutableStateOf(false) }
+    var hiText by remember { mutableStateOf("Привет!") }
+    var btnText by remember { mutableStateOf("Войти") }
+    var btnText2 by remember { mutableStateOf("Вы впервые?Создать пользователя") }
 
     val icon = if (passwordVisibility)
         Icons.Filled.Visibility
     else
         Icons.Filled.VisibilityOff
 
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Привет!")
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(text = "Заполните Свои Данные Или")
-            Text(text = "Продолжите Через Социальные Медиа")
-            Spacer(modifier = Modifier.size(35.dp))
+    Row(horizontalArrangement = Arrangement.Center) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Text(text = hiText)
+
+            Text(
+                text = "Заполните Свои Данные Или Продолжите Через Социальные Медиа",
+                textAlign = TextAlign.Center,
+                modifier = Modifier.width(315.dp).height(48.dp))
+            if(isVisible){
+                Column {
+                    Text(text = "Ваше имя")
+                    Spacer(modifier = Modifier.size(12.dp))
+                    OutlinedTextField(
+                        value = name,
+                        onValueChange = { name = it },
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier
+                            .width(335.dp)
+                            .height(48.dp)
+                    )
+                }
+            }
             Column {
                 Text(text = "Email")
                 Spacer(modifier = Modifier.size(12.dp))
@@ -65,8 +93,6 @@ fun LogInScreen() {
                         .height(48.dp)
                 )
             }
-
-            Spacer(modifier = Modifier.size(26.dp))
             Box {
                 Column() {
                     Text(text = "Пароль")
@@ -92,34 +118,56 @@ fun LogInScreen() {
                             .width(335.dp)
                             .height(48.dp)
                     )
-                    TextButton(
-                        onClick = {
-                            //Код
-                            //Изменение
-                        },
-                        modifier = Modifier.align(Alignment.End)
-                    ) {
-                        Text(text = "Востановить")
+                    if(!isVisible){
+                        TextButton(
+                            onClick = {
+                                //Код
+                                //Изменение
+                            },
+                            modifier = Modifier.align(Alignment.End)
+                        ) {
+                            Text(text = "Востановить")
+                        }
                     }
                 }
             }
+            if(isVisible){
+                RadioButtonSingleSelection()
+            }
+
             Button(
                 onClick = {
                     //Код
                 },
+                shape = RoundedCornerShape(10.dp),
                 modifier = Modifier
                     .width(335.dp)
                     .height(50.dp)
             ) {
-                Text(text = "Войти")
+                Text(text = btnText)
             }
-            Spacer(modifier = Modifier.size(100.dp))
-            Row(
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Text(text = "Вы впервые?")
-                Text(text = "Создать пользователя")
+            TextButton(onClick = {
+                if(!isVisible){
+                    isVisible = true
+                    btnText = "Регистрация"
+                    btnText2 = "Есть аккаунт?Войти"
+                    hiText = "Регистрация"
+                }
+                else{
+                    isVisible = false
+                    btnText = "Войти"
+                    btnText2 = "Вы впервые?Создать пользователя"
+                    hiText = "Привет!"
+                }
+            }) {
+                Text(text = btnText2)
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewLoginScreen(){
+    LogInScreen {  }
 }
