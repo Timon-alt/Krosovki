@@ -11,13 +11,21 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationDefaults
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -124,18 +132,9 @@ fun esh(){
     }
 }
 
-@Preview
-@Composable
-fun previewEsh(){
-    esh()
-}
 
-// приколл
-@Preview
-@Composable
-fun PreviewSegmentedProgressBarr(){
-    StartScreenText(true, 0)
-}
+
+
 
 @Composable
 fun RadioButtonSingleSelection(modifier: Modifier = Modifier) {
@@ -170,8 +169,26 @@ fun RadioButtonSingleSelection(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview
 @Composable
-fun previewRadioBtnTest(){
-    RadioButtonSingleSelection()
+fun NavBar() {
+    var selectedItem by remember { mutableStateOf(0) }
+    val items = listOf("Songs", "Artists", "Playlists")
+
+    BottomNavigation(windowInsets = BottomNavigationDefaults.windowInsets) {
+        items.forEachIndexed { index, item ->
+            BottomNavigationItem(
+                icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
+                label = { Text(item) },
+                selected = selectedItem == index,
+                onClick = { selectedItem = index }
+            )
+        }
+    }
 }
+
+@Composable
+@Preview
+fun PreviewCheeeck(){
+    NavBar()
+}
+

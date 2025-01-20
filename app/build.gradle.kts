@@ -64,4 +64,6 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     // Screen Navigation
     implementation(libs.androidx.navigation.compose)
+    // Navigation bar
+    implementation(libs.androidx.material)
 }
