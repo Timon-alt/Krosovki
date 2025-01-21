@@ -1,23 +1,35 @@
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationDefaults
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.sharp.Favorite
+import androidx.compose.material3.Button
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -30,6 +42,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
@@ -170,25 +184,55 @@ fun RadioButtonSingleSelection(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun NavBar() {
-    var selectedItem by remember { mutableStateOf(0) }
-    val items = listOf("Songs", "Artists", "Playlists")
+fun CardCheeeck(){
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        modifier = Modifier.width(160.dp)
+    ) {
+        Column(verticalArrangement = Arrangement.SpaceEvenly) {
+            FilledTonalButton(
+                shape = CircleShape,
+                contentPadding = PaddingValues(0.dp),
+                modifier = Modifier.size(34.dp),
 
-    BottomNavigation(windowInsets = BottomNavigationDefaults.windowInsets) {
-        items.forEachIndexed { index, item ->
-            BottomNavigationItem(
-                icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
-                label = { Text(item) },
-                selected = selectedItem == index,
-                onClick = { selectedItem = index }
+                onClick = {}) {
+                Icon(Icons.Outlined.Favorite, "Like")
+            }
+            Image(
+                painter = painterResource(R.drawable.card_krosovok),
+                contentDescription = "Krosovok",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.height(70.dp)
+
             )
+            Text(
+                text = "BEST SELLER",
+                color = Color(0xFF48B2E7),
+                fontSize = 12.sp)
+            Text(
+                text = "Nike Air Max",
+                color = Color(0xFF6A6A6A),
+                fontSize = 16.sp)
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = " ₽ 752.00")
+                Button(
+                    onClick = {},
+                    contentPadding = PaddingValues(0.dp),
+                    modifier = Modifier.size(34.dp)) {
+                    Icon(Icons.Filled.Add, "Add")
+                }
+            }
         }
     }
+
 }
 
 @Composable
 @Preview
 fun PreviewCheeeck(){
-    NavBar()
+    CardCheeeck()
 }
 
