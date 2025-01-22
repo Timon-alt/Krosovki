@@ -26,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -68,7 +69,7 @@ fun StartScreen(onClick: () -> Unit){
             }
             Image(
                 painter = painterResource(listOfImage[counter]),
-                contentDescription = "Che za tyagi"
+                contentDescription = "Che za tyagi",
             )
             StartScreenText(isVisible, counter)
             SegmentedProgressBar(3, currentProgress)
@@ -85,7 +86,8 @@ fun StartScreen(onClick: () -> Unit){
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                 modifier = Modifier
                     .width(335.dp)
-                    .height(50.dp)) {
+                    .height(50.dp)
+            ) {
                 Text(text = buttonText, color = Color.Black)
 
             }

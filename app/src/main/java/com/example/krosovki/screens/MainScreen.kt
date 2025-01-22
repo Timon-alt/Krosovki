@@ -8,16 +8,19 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import com.example.krosovki.controllers.bottomNavigation.NavGraph
 import com.example.krosovki.screens.navBar.BottomNavBar
+import com.example.krosovki.ui.theme.KrosovkiTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen(){
     val navController = rememberNavController()
-    Scaffold(
-        bottomBar = {
-            BottomNavBar(navController = navController)
+    KrosovkiTheme {
+        Scaffold(
+            bottomBar = {
+                BottomNavBar(navController = navController)
+            }
+        ) {
+            NavGraph(navHostController = navController)
         }
-    ) {
-        NavGraph(navHostController = navController)
     }
 }

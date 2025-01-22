@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,9 +26,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.sharp.Favorite
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -189,14 +193,21 @@ fun CardCheeeck(){
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier.width(160.dp)
     ) {
-        Column(verticalArrangement = Arrangement.SpaceEvenly) {
+        Column(verticalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.padding(9.dp)) {
             FilledTonalButton(
                 shape = CircleShape,
                 contentPadding = PaddingValues(0.dp),
                 modifier = Modifier.size(34.dp),
+                colors = ButtonColors(
+                    containerColor = Color(0xFFF7F7F9),
+                    disabledContainerColor = Color.Gray,
+                    contentColor = Color.Black,
+                    disabledContentColor = Color.Gray
+                ),
 
                 onClick = {}) {
-                Icon(Icons.Outlined.Favorite, "Like")
+                Icon(Icons.Outlined.FavoriteBorder, "Like")
             }
             Image(
                 painter = painterResource(R.drawable.card_krosovok),
@@ -209,12 +220,14 @@ fun CardCheeeck(){
                 text = "BEST SELLER",
                 color = Color(0xFF48B2E7),
                 fontSize = 12.sp)
+            Spacer(Modifier.size(8.dp))
             Text(
                 text = "Nike Air Max",
                 color = Color(0xFF6A6A6A),
                 fontSize = 16.sp)
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = " ₽ 752.00")
@@ -222,7 +235,8 @@ fun CardCheeeck(){
                     onClick = {},
                     contentPadding = PaddingValues(0.dp),
                     modifier = Modifier.size(34.dp)) {
-                    Icon(Icons.Filled.Add, "Add")
+                    Icon(Icons.Filled.Add, "Add",
+                        tint = Color.White)
                 }
             }
         }
