@@ -182,7 +182,8 @@ fun HomeScreen(){
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth().padding(20.dp)
         ) {
-
+            CardCheeeck()
+            CardCheeeck()
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,

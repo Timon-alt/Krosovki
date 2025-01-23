@@ -56,6 +56,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.krosovki.R
+import com.example.krosovki.screens.MyIconShape
 
 // В этом файле происходят разного рода тесты
 
@@ -194,50 +195,47 @@ fun CardCheeeck(){
         modifier = Modifier.width(160.dp)
     ) {
         Column(verticalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier.padding(9.dp)) {
-            FilledTonalButton(
-                shape = CircleShape,
-                contentPadding = PaddingValues(0.dp),
-                modifier = Modifier.size(34.dp),
-                colors = ButtonColors(
-                    containerColor = Color(0xFFF7F7F9),
-                    disabledContainerColor = Color.Gray,
-                    contentColor = Color.Black,
-                    disabledContentColor = Color.Gray
-                ),
+            modifier = Modifier) {
+            Column(Modifier.padding(9.dp)) {
+                FilledTonalButton(
+                    shape = CircleShape,
+                    contentPadding = PaddingValues(0.dp),
+                    modifier = Modifier.size(34.dp),
+                    colors = ButtonColors(
+                        containerColor = Color(0xFFF7F7F9),
+                        disabledContainerColor = Color.Gray,
+                        contentColor = Color.Black,
+                        disabledContentColor = Color.Gray
+                    ),
+                    onClick = {}) {
+                    Icon(Icons.Outlined.FavoriteBorder, "Like")
+                }
+                Image(
+                    painter = painterResource(R.drawable.card_krosovok),
+                    contentDescription = "Krosovok",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.height(70.dp)
+                )
+                Text(
+                    text = "BEST SELLER",
+                    color = Color(0xFF48B2E7),
+                    fontSize = 12.sp)
+                Spacer(Modifier.size(8.dp))
 
-                onClick = {}) {
-                Icon(Icons.Outlined.FavoriteBorder, "Like")
+                Text(
+                    text = "Nike Air Max",
+                    color = Color(0xFF6A6A6A),
+                    fontSize = 16.sp)
             }
-            Image(
-                painter = painterResource(R.drawable.card_krosovok),
-                contentDescription = "Krosovok",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.height(70.dp)
-
-            )
-            Text(
-                text = "BEST SELLER",
-                color = Color(0xFF48B2E7),
-                fontSize = 12.sp)
-            Spacer(Modifier.size(8.dp))
-            Text(
-                text = "Nike Air Max",
-                color = Color(0xFF6A6A6A),
-                fontSize = 16.sp)
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = " ₽ 752.00")
-                Button(
-                    onClick = {},
-                    contentPadding = PaddingValues(0.dp),
-                    modifier = Modifier.size(34.dp)) {
-                    Icon(Icons.Filled.Add, "Add",
-                        tint = Color.White)
-                }
+                Text(
+                    text = " ₽ 752.00",
+                    modifier = Modifier.padding(9.dp))
+                MyIconShape()
             }
         }
     }

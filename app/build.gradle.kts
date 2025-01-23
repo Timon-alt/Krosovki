@@ -66,4 +66,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     // Navigation bar
     implementation(libs.androidx.material)
+    // Custom shapes
+    implementation(libs.androidx.graphics.shapes)
 }
