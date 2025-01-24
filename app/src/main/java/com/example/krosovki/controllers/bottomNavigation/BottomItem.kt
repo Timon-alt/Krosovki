@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomItem(val icon: ImageVector, val route: String) {
     object HomeScreen: BottomItem(Icons.Filled.Home, "HomeScreen")
-    object PopularScreen: BottomItem(Icons.Filled.Favorite, "PopularScreen")
+    object LikedScreen: BottomItem(Icons.Filled.Favorite, "LikedScreen")
     object CatalogScreen: BottomItem(Icons.Filled.Notifications, "CatalogScreen")
     object ProfileScreen: BottomItem(Icons.Filled.Person, "ProfileScreen")
 }

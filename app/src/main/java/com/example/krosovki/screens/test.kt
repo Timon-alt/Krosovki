@@ -1,5 +1,6 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -190,6 +191,10 @@ fun RadioButtonSingleSelection(modifier: Modifier = Modifier) {
 
 @Composable
 fun CardCheeeck(){
+    var clicked by remember { mutableStateOf(false) }
+    var icon = if (clicked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder
+    var iconColor = if (clicked) Color.Red else Color.Black
+
     Card(
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier.width(160.dp)
@@ -200,15 +205,19 @@ fun CardCheeeck(){
                 FilledTonalButton(
                     shape = CircleShape,
                     contentPadding = PaddingValues(0.dp),
-                    modifier = Modifier.size(34.dp),
+
                     colors = ButtonColors(
                         containerColor = Color(0xFFF7F7F9),
                         disabledContainerColor = Color.Gray,
                         contentColor = Color.Black,
                         disabledContentColor = Color.Gray
                     ),
-                    onClick = {}) {
-                    Icon(Icons.Outlined.FavoriteBorder, "Like")
+                    onClick = {
+                        clicked = !clicked
+
+                    }) {
+                    Icon(icon, "Like",
+                        tint = iconColor)
                 }
                 Image(
                     painter = painterResource(R.drawable.card_krosovok),

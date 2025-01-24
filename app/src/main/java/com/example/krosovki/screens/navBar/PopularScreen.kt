@@ -7,11 +7,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -76,15 +79,19 @@ fun PopularScreen(){
                     androidx.compose.material.Icon(Icons.Outlined.FavoriteBorder, "Like")
                 }
             }
-            LazyColumn(
+            Spacer(Modifier.size(20.dp))
+            LazyVerticalGrid(
+                verticalArrangement = Arrangement.spacedBy(15.dp),
+                horizontalArrangement = Arrangement.spacedBy(15.dp),
+                columns = GridCells.Fixed(2),
                 modifier = Modifier
-                    .verticalScroll(rememberScrollState())
             ) {
-                items(count = 5){
+                items(count = 6){
                     CardCheeeck()
                 }
             }
         }
+
     }
 }
 

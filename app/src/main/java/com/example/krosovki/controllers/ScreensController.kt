@@ -8,6 +8,7 @@ import com.example.krosovki.screens.EnterWithoutPass
 import com.example.krosovki.screens.LogInScreen
 import com.example.krosovki.screens.MainScreen
 import com.example.krosovki.screens.StartScreen
+import com.example.krosovki.screens.navBar.PopularScreen
 
 @Composable
 fun ScrensController() {
@@ -29,6 +30,9 @@ fun ScrensController() {
         }
         composable("MainScreen"){
             MainScreen()
+        }
+        composable("PopularScreen") {
+            PopularScreen()
         }
     }
 

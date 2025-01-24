@@ -19,7 +19,7 @@ import com.example.krosovki.controllers.bottomNavigation.BottomItem
 fun BottomNavBar(navController: NavController){
     val listOfItems = listOf(
         BottomItem.HomeScreen,
-        BottomItem.PopularScreen,
+        BottomItem.LikedScreen,
         BottomItem.CatalogScreen,
         BottomItem.ProfileScreen
     )
