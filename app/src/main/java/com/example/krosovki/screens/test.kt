@@ -252,7 +252,43 @@ fun CardCheeeck(){
 }
 
 @Composable
-@Preview
+fun MyCardButton(){
+    var clicked by remember { mutableStateOf(false) }
+    var icon = if (clicked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder
+    var iconColor = if (clicked) Color.Red else Color.Black
+
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        modifier = Modifier.width(160.dp)
+    ) {
+        Column(verticalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier) {
+            Column(Modifier.padding(9.dp)) {
+                FilledTonalButton(
+                    shape = CircleShape,
+                    contentPadding = PaddingValues(0.dp),
+
+                    colors = ButtonColors(
+                        containerColor = Color(0xFFF7F7F9),
+                        disabledContainerColor = Color.Gray,
+                        contentColor = Color.Black,
+                        disabledContentColor = Color.Gray
+                    ),
+                    onClick = {
+                        clicked = !clicked
+
+                    }) {
+                    Icon(icon, "Like",
+                        tint = iconColor)
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+@Preview()
 fun PreviewCheeeck(){
     CardCheeeck()
 }
