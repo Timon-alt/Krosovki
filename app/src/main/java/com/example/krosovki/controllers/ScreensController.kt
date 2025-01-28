@@ -7,14 +7,16 @@ import androidx.navigation.compose.rememberNavController
 import com.example.krosovki.screens.EnterWithoutPass
 import com.example.krosovki.screens.LogInScreen
 import com.example.krosovki.screens.MainScreen
+import com.example.krosovki.screens.SearchScreen
 import com.example.krosovki.screens.StartScreen
+import com.example.krosovki.screens.navBar.LikedScreen
 import com.example.krosovki.screens.navBar.PopularScreen
 
 @Composable
 fun ScrensController() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "MainScreen"){
+    NavHost(navController = navController, startDestination = "SearchScreen"){
         composable("startScreen"){
             StartScreen() {
                 navController.navigate("LoginScreen")
@@ -31,8 +33,9 @@ fun ScrensController() {
         composable("MainScreen"){
             MainScreen()
         }
+        composable("SearchScreen") {
+            SearchScreen()
+        }
 
     }
-
-
 }

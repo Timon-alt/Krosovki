@@ -33,6 +33,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+
     }
     buildFeatures {
         compose = true
@@ -68,4 +69,12 @@ dependencies {
     implementation(libs.androidx.material)
     // Custom shapes
     implementation(libs.androidx.graphics.shapes)
+    // Material 3
+    implementation(libs.androidx.material3.v140alpha02)
+    // Filter textField
+    implementation(libs.ui) // Or latest
+    implementation(libs.androidx.material.v120) // Or latest
+    implementation(libs.androidx.lifecycle.viewmodel.compose) // Or latest
+    implementation(libs.androidx.lifecycle.runtime.ktx.v240) // Or latest
+
 }

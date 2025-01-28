@@ -6,6 +6,7 @@ import androidx.navigation.NavGraph
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.krosovki.screens.navBar.CatalogScreen
 import com.example.krosovki.screens.navBar.HomeScreen
 import com.example.krosovki.screens.navBar.LikedScreen
@@ -14,6 +15,7 @@ import com.example.krosovki.screens.navBar.ProfileScreen
 
 @Composable
 fun NavGraph(navHostController: NavHostController){
+
     NavHost(navController = navHostController, startDestination = "HomeScreen"){
         composable("HomeScreen") {
             HomeScreen() {
@@ -24,16 +26,17 @@ fun NavGraph(navHostController: NavHostController){
             CatalogScreen()
         }
         composable("LikedScreen") {
-            LikedScreen()
+            LikedScreen(navHostController)
         }
         composable("ProfileScreen") {
             ProfileScreen()
         }
         composable("PopularScreen") {
-            PopularScreen() {
-                navHostController.navigate("HomeScreen")
-                navHostController.navigate("PopularScreen")
+            PopularScreen(navHostController) {
+                navHostController.navigate("LikedScreen")
+
             }
         }
+
     }
 }

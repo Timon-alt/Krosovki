@@ -193,7 +193,7 @@ fun RadioButtonSingleSelection(modifier: Modifier = Modifier) {
 fun CardCheeeck(){
     var clicked by remember { mutableStateOf(false) }
     var icon = if (clicked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder
-    var iconColor = if (clicked) Color.Red else Color.Black
+    var iconColor = if (clicked) Color(0xFFF87265) else Color.Black
 
     Card(
         shape = RoundedCornerShape(16.dp),

@@ -42,13 +42,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.krosovki.R
 import com.example.krosovki.screens.MyIconShape
 
 var counterr = 4
 
 @Composable
-fun LikedScreen(){
+fun LikedScreen(navController: NavController){
     var counter by remember { mutableStateOf(counterr) }
     Column(
         modifier = Modifier
@@ -62,7 +64,7 @@ fun LikedScreen(){
                 modifier = Modifier.fillMaxWidth()
             ) {
                 FilledTonalButton(
-                    onClick = {/*TODO*/ },
+                    onClick = { navController.popBackStack() },
                     shape = CircleShape,
                     contentPadding = PaddingValues(0.dp),
                     modifier = Modifier.size(44.dp),
@@ -91,7 +93,7 @@ fun LikedScreen(){
                     ),
                     onClick = {}) {
                     androidx.compose.material.Icon(Icons.Outlined.Favorite, "Like",
-                        tint = Color.Red)
+                        tint = Color(0xFFF87265))
                 }
             }
             Spacer(Modifier.size(20.dp))
@@ -143,7 +145,7 @@ fun LikedCard(){
 
                     }) {
                     androidx.compose.material.Icon(Icons.Filled.Favorite, "Like",
-                        tint = Color.Red)
+                        tint = Color(0xFFF87265))
                 }
                 Image(
                     painter = painterResource(R.drawable.card_krosovok),
@@ -179,5 +181,5 @@ fun LikedCard(){
 @Preview
 @Composable
 fun PreviewLikedScreen() {
-    LikedScreen()
+    LikedScreen(rememberNavController())
 }

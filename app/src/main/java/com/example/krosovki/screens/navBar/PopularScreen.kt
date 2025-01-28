@@ -33,9 +33,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun PopularScreen(onClick: () -> Unit){
+fun PopularScreen(navController: NavController,onClick: () -> Unit){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,7 +49,7 @@ fun PopularScreen(onClick: () -> Unit){
                 modifier = Modifier.fillMaxWidth()
             ) {
                 FilledTonalButton(
-                    onClick = {onClick()},
+                    onClick = {navController.popBackStack()},
                     shape = CircleShape,
                     contentPadding = PaddingValues(0.dp),
                     modifier = Modifier.size(44.dp),
@@ -98,5 +99,5 @@ fun PopularScreen(onClick: () -> Unit){
 @Preview
 @Composable
 fun PreviewPopularScreen(){
-    PopularScreen({})
+
 }
