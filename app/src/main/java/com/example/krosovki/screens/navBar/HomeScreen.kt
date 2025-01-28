@@ -64,7 +64,7 @@ import androidx.compose.ui.unit.sp
 import com.example.krosovki.R
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen(onClick: () -> Unit){
     var search by remember { mutableStateOf("") }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -176,7 +176,7 @@ fun HomeScreen(){
                 text = "Все",
                 fontSize = 12.sp,
                 color = Color(0xFF48B2E7),
-                modifier = Modifier.clickable {  })
+                modifier = Modifier.clickable { onClick() })
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -206,5 +206,5 @@ fun HomeScreen(){
 @Preview
 @Composable
 fun PreviewHomewScreen(){
-    HomeScreen()
+    HomeScreen({})
 }

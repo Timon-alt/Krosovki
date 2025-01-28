@@ -16,7 +16,9 @@ import com.example.krosovki.screens.navBar.ProfileScreen
 fun NavGraph(navHostController: NavHostController){
     NavHost(navController = navHostController, startDestination = "HomeScreen"){
         composable("HomeScreen") {
-            HomeScreen()
+            HomeScreen() {
+                navHostController.navigate("PopularScreen")
+            }
         }
         composable("CatalogScreen") {
             CatalogScreen()
@@ -26,6 +28,12 @@ fun NavGraph(navHostController: NavHostController){
         }
         composable("ProfileScreen") {
             ProfileScreen()
+        }
+        composable("PopularScreen") {
+            PopularScreen() {
+                navHostController.navigate("HomeScreen")
+                navHostController.navigate("PopularScreen")
+            }
         }
     }
 }

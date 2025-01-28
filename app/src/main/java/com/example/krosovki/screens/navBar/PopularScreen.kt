@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun PopularScreen(){
+fun PopularScreen(onClick: () -> Unit){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,7 +48,7 @@ fun PopularScreen(){
                 modifier = Modifier.fillMaxWidth()
             ) {
                 FilledTonalButton(
-                    onClick = {/*TODO*/},
+                    onClick = {onClick()},
                     shape = CircleShape,
                     contentPadding = PaddingValues(0.dp),
                     modifier = Modifier.size(44.dp),
@@ -75,7 +75,7 @@ fun PopularScreen(){
                         contentColor = Color.Black,
                         disabledContentColor = Color.Gray
                     ),
-                    onClick = {}) {
+                    onClick = {onClick()}) {
                     androidx.compose.material.Icon(Icons.Outlined.FavoriteBorder, "Like")
                 }
             }
@@ -98,5 +98,5 @@ fun PopularScreen(){
 @Preview
 @Composable
 fun PreviewPopularScreen(){
-    PopularScreen()
+    PopularScreen({})
 }

@@ -22,7 +22,7 @@ fun ScrensController() {
         }
         composable("loginScreen"){
             LogInScreen() {
-                // Переход на мэйн экран
+                navController.navigate("MainScreen")
             }
         }
         composable("enterWithoutPass"){
@@ -31,9 +31,7 @@ fun ScrensController() {
         composable("MainScreen"){
             MainScreen()
         }
-        composable("PopularScreen") {
-            PopularScreen()
-        }
+
     }
 
 
