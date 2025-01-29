@@ -16,7 +16,7 @@ import com.example.krosovki.screens.navBar.PopularScreen
 fun ScrensController() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "SearchScreen"){
+    NavHost(navController = navController, startDestination = "OtpScreen"){
         composable("startScreen"){
             StartScreen() {
                 navController.navigate("LoginScreen")
@@ -35,6 +35,9 @@ fun ScrensController() {
         }
         composable("SearchScreen") {
             SearchScreen()
+        }
+        composable("OtpScreen") {
+            EnterWithoutPass {  }
         }
 
     }

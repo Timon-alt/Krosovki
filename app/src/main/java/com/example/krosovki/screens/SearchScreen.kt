@@ -48,34 +48,7 @@ fun SearchScreen() {
             .fillMaxSize()
             .background(Color(0xFFF7F7F9))
     ) {
-        Column(Modifier.padding(20.dp)) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(110.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                FilledTonalButton(
-                    onClick = { },
-                    shape = CircleShape,
-                    contentPadding = PaddingValues(0.dp),
-                    modifier = Modifier.size(44.dp),
-                    colors = ButtonColors(
-                        containerColor = Color.White,
-                        disabledContainerColor = Color.Gray,
-                        contentColor = Color.Black,
-                        disabledContentColor = Color.Gray
-                    )
-                ) {
-                    Icon(Icons.Filled.ArrowBackIosNew, "Back")
-                }
-
-                Text(
-                    text = "Поиск",
-                    fontSize = 16.sp
-                )
-            }
-
-        }
+        MySearchBar()
     }
 }
 
@@ -83,7 +56,7 @@ fun SearchScreen() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewSearchScreen(){
-    MySearchBar()
+    SearchScreen()
 }
 
 
