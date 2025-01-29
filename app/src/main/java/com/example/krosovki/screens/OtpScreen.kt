@@ -1,10 +1,17 @@
 package com.example.krosovki.screens
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.graphics.drawable.Icon
+import android.view.textclassifier.ConversationActions.Request
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,22 +43,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 
 @Composable
 fun EnterWithoutPass(onClick: () -> Unit){
     var email by remember { mutableStateOf("") }
-    var visible by remember { mutableStateOf(false) }
+    var openMyDialog = remember { mutableStateOf(false) }
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize()
     ) {
-        Column(Modifier.padding(20.dp)) {
-            Row(horizontalArrangement = Arrangement.Start) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+            modifier = Modifier.padding(20.dp)
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.Start,
+                modifier = Modifier.fillMaxWidth()) {
                 OutlinedButton(
                     onClick = {/*TODO*/},
                     shape = CircleShape,
@@ -61,43 +75,36 @@ fun EnterWithoutPass(onClick: () -> Unit){
                     Icon(Icons.Filled.ArrowBackIosNew, "Back")
                 }
             }
-            Row(horizontalArrangement = Arrangement.Center){
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceEvenly,
-                    modifier = Modifier.height(272.dp).fillMaxWidth()
-                ) {
-
-                    Text(text = "Забыл пароль",
-                        fontSize = 32.sp)
-                    Text(text =  "Введите Cвою Учётную Запись Для Сброса",
-                        textAlign = TextAlign.Center,
-                        color = Color.LightGray,
-                        modifier = Modifier.width(335.dp))
-                    OutlinedTextField(
-                        value = email,
-                        onValueChange = { email = it },
-                        shape = RoundedCornerShape(10.dp),
-                        modifier = Modifier
-                            .width(335.dp)
-                            .height(48.dp)
-                    )
-                    Button(
-                        onClick = { visible = !visible},
-                        shape = RoundedCornerShape(10.dp),
-                        modifier = Modifier.width(335.dp)) {
-                        Text(text = "Отправить")
-                    }
-
-                    AnimatedVisibility(visible) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.fillMaxSize()) {
-                            CardMessage()
-                        }
-                    }
-                }
+            Text(text = "Забыл пароль",
+                fontSize = 32.sp)
+            Text(text =  "Введите Cвою Учётную Запись Для Сброса",
+                textAlign = TextAlign.Center,
+                color = Color.LightGray,
+                modifier = Modifier.width(335.dp))
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                shape = RoundedCornerShape(10.dp),
+                modifier = Modifier
+                    .width(335.dp)
+                    .height(48.dp)
+            )
+            Button(
+                onClick = {
+                    openMyDialog.value = !openMyDialog.value
+                },
+                shape = RoundedCornerShape(10.dp),
+                modifier = Modifier.width(335.dp)) {
+                Text(text = "Отправить")
             }
+
+        }
+    }
+    when {
+        openMyDialog.value -> {
+            MyDialog(
+                onDismissRequest = {openMyDialog.value = false},
+            )
         }
     }
 }
@@ -115,6 +122,7 @@ fun CardMessage() {
         modifier = Modifier
             .width(335.dp)
             .height(196.dp)
+
 
 
     ) {
@@ -146,4 +154,11 @@ fun CardMessage() {
 
     }
 
+}
+
+@Composable
+fun MyDialog(onDismissRequest: () -> Unit) {
+    Dialog(onDismissRequest = { onDismissRequest() }) {
+        CardMessage()
+    }
 }
