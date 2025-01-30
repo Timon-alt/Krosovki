@@ -43,17 +43,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.krosovki.R
+import com.example.krosovki.components.OtpInputTextField
 
 @Composable
 fun EnterWithoutPass(onClick: () -> Unit){
     var email by remember { mutableStateOf("") }
-    var openMyDialog = remember { mutableStateOf(false) }
+    val visible = remember { mutableStateOf(false) }
+    val openMyDialog = remember { mutableStateOf(false) }
+    val mainText = if(!visible.value) R.string.fgt_pass_mainText1 else R.string.fgt_pass_mainText2
+    val minorText = if(!visible.value) R.string.fgt_pass_anotherText1 else R.string.fgt_pass_anotherText2
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
@@ -75,29 +83,58 @@ fun EnterWithoutPass(onClick: () -> Unit){
                     Icon(Icons.Filled.ArrowBackIosNew, "Back")
                 }
             }
-            Text(text = "Забыл пароль",
+            Text(
+                text = stringResource(mainText),
                 fontSize = 32.sp)
-            Text(text =  "Введите Cвою Учётную Запись Для Сброса",
+
+            Text(text =  stringResource(minorText),
                 textAlign = TextAlign.Center,
                 color = Color.LightGray,
-                modifier = Modifier.width(335.dp))
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                shape = RoundedCornerShape(10.dp),
-                modifier = Modifier
-                    .width(335.dp)
-                    .height(48.dp)
+                modifier = Modifier.width(335.dp)
             )
-            Button(
-                onClick = {
-                    openMyDialog.value = !openMyDialog.value
-                },
-                shape = RoundedCornerShape(10.dp),
-                modifier = Modifier.width(335.dp)) {
-                Text(text = "Отправить")
+            if (!visible.value) {
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    shape = RoundedCornerShape(10.dp),
+                    modifier = Modifier
+                        .width(335.dp)
+                        .height(48.dp)
+                )
+                Button(
+                    onClick = {
+                        openMyDialog.value = !openMyDialog.value
+                        visible.value = !visible.value
+                    },
+                    shape = RoundedCornerShape(10.dp),
+                    modifier = Modifier.width(335.dp)) {
+                    Text(text = "Отправить")
+                }
             }
+            else {
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "OTP Код"
+                    )
+                }
 
+                OtpInputTextField(6)
+
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Отправить заново"
+                    )
+                    // Сделать таймер
+                    Text(
+                        text = "00:30"
+                    )
+                }
+            }
         }
     }
     when {

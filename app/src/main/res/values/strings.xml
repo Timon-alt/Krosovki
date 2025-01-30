@@ -9,4 +9,9 @@
     <string name="login_screen3">Заполните Свои Данные Или Продолжите Через Социальные Медиа</string>
     <string name="login_screen4">Вы впервые?Создать пользователя</string>
     <string name="login_screen5">Есть аккаунт?Войти</string>
+    <string name="fgt_pass_mainText1">Забыл Пароль</string>
+    <string name="fgt_pass_mainText2">OTP Проверка</string>
+    <string name="fgt_pass_anotherText1">Введите Свою Учётную Запись Для Сброса</string>
+    <string name="fgt_pass_anotherText2">Пожалуйста, Проверьте Свою Электронную Почту, Чтобы
+    Увидеть Код Подтверждения</string>
 </resources>
