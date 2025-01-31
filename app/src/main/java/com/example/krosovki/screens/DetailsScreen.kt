@@ -3,9 +3,11 @@ package com.example.krosovki.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -111,11 +113,13 @@ fun DetailsScreen() {
                 fontSize = 24.sp,
             )
         }
+
         Image(
             painter = painterResource(R.drawable.card_krosovok),
             contentDescription = "Krosovok",
-            modifier = Modifier.size(240.dp)
+            modifier = Modifier.size(241.dp)
         )
+
         Column(
             modifier = Modifier.padding(20.dp)
         ) {
@@ -127,6 +131,9 @@ fun DetailsScreen() {
                     SneakerCard(sneakersList[sneaker])
                 }
             }
+
+            Spacer(Modifier.size(33.dp))
+
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "Вставка Max Air 270 Обеспечивает Непревзойдённый Комфорт В Течение Всего" +
@@ -143,6 +150,9 @@ fun DetailsScreen() {
                     )
                 }
             }
+
+            Spacer(Modifier.size(64.dp))
+
             Row(
                 horizontalArrangement = Arrangement.spacedBy(18.dp),
                 modifier = Modifier.fillMaxWidth()

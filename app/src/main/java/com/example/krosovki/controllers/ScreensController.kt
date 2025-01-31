@@ -17,7 +17,7 @@ import com.example.krosovki.screens.navBar.PopularScreen
 fun ScrensController() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "OtpScreen"){
+    NavHost(navController = navController, startDestination = "SlideBar"){
         composable("startScreen"){
             StartScreen() {
                 navController.navigate("LoginScreen")
@@ -42,6 +42,9 @@ fun ScrensController() {
         }
         composable("DetailsScreen") {
             DetailsScreen()
+        }
+        composable("SlideBar"){
+            SlideMenuBar {  }
         }
 
     }
