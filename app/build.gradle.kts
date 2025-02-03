@@ -76,5 +76,13 @@ dependencies {
     implementation(libs.androidx.material.v120) // Or latest
     implementation(libs.androidx.lifecycle.viewmodel.compose) // Or latest
     implementation(libs.androidx.lifecycle.runtime.ktx.v240) // Or latest
+    // Supabase
+    implementation(libs.bom)
+    implementation(libs.postgrest.kt)
+    implementation(libs.ktor.client.android)
+    implementation(libs.auth.kt)
+    implementation(libs.realtime.kt)
+    // Хэш паролей
+    implementation(libs.jbcrypt)
 
 }
