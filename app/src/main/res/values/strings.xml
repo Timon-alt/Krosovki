@@ -14,4 +14,6 @@
     <string name="fgt_pass_anotherText1">Введите Свою Учётную Запись Для Сброса</string>
     <string name="fgt_pass_anotherText2">Пожалуйста, Проверьте Свою Электронную Почту, Чтобы
     Увидеть Код Подтверждения</string>
+    <string name="exmp_text">Lorem ipsum dolor sit amet consectetur. Venenatis pulvinar lobortis
+        risus consectetur morbi egestas id in bibendum. Volutpat nulla urna sit sed diam nulla.</string>
 </resources>

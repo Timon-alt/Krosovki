@@ -28,7 +28,6 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingBag
