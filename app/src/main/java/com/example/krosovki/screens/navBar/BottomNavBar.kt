@@ -17,7 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.krosovki.controllers.bottomNavigation.BottomItem
+import com.example.krosovki.navigation.bottomNavigation.BottomItem
 
 @Composable
 fun BottomNavBar(navController: NavController){

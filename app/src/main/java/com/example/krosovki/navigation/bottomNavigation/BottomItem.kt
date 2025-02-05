@@ -1,4 +1,4 @@
-package com.example.krosovki.controllers.bottomNavigation
+package com.example.krosovki.navigation.bottomNavigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FavoriteBorder

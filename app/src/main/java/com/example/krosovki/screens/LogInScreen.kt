@@ -1,6 +1,7 @@
 package com.example.krosovki.screens
 
 import RadioButtonSingleSelection
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,6 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.krosovki.R
+import com.example.krosovki.controllers.LogInController
 
 @Composable
 fun LogInScreen(onClick: () -> Unit) {
@@ -49,6 +51,7 @@ fun LogInScreen(onClick: () -> Unit) {
     var hiText by remember { mutableStateOf("Привет!") }
     var btnText by remember { mutableStateOf("Войти") }
     var btnText2 by remember { mutableStateOf("Вы впервые?Создать пользователя") }
+    val logInController = LogInController()
 
     val icon = if (passwordVisibility)
         Icons.Filled.Visibility
@@ -137,7 +140,22 @@ fun LogInScreen(onClick: () -> Unit) {
 
             Button(
                 onClick = {
-                    //Код
+                    when(btnText) {
+                        "Войти" -> {
+                            if (logInController.signIn(email, password)) {
+                                onClick()
+                            } else {
+                                // Выдать диалоговое окно к примеру
+                            }
+                        }
+                        "Регистрация" -> {
+                            if (logInController.signUp(email, password)) {
+                                onClick()
+                            } else {
+                                // Вызвать диалоговое окно к примеру
+                            }
+                        }
+                    }
                 },
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier

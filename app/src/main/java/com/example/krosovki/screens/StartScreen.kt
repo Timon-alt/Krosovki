@@ -2,6 +2,7 @@ package com.example.krosovki.screens
 
 import SegmentedProgressBar
 import StartScreenText
+import android.util.Log
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandHorizontally
@@ -48,6 +49,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.krosovki.R
 import com.example.krosovki.components.onboardItemsList
+import com.example.krosovki.database.UsersGateWay
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun StartScreen(onClick: () -> Unit){

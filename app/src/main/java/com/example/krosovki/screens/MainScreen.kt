@@ -6,7 +6,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material3.NavigationBar
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
-import com.example.krosovki.controllers.bottomNavigation.NavGraph
+import com.example.krosovki.navigation.bottomNavigation.NavGraph
 import com.example.krosovki.screens.navBar.BottomNavBar
 import com.example.krosovki.ui.theme.KrosovkiTheme
 
