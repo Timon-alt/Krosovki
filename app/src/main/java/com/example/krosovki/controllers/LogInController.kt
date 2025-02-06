@@ -24,11 +24,12 @@ class LogInController {
 
     fun signUp(email: String,  password: String) : Boolean {
 
-        var result = true
+        var result = false
 
         if (isEmailValid(email)) {
             runBlocking {
                 result = user.signUp(email, password)
+                Log.d("SignInController", "$result")
             }
         }
         return result
