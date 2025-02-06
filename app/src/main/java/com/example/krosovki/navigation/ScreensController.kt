@@ -7,7 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.krosovki.components.SlideMenuBar
 import com.example.krosovki.screens.DetailsScreen
 import com.example.krosovki.screens.EnterWithoutPass
-import com.example.krosovki.screens.LogInScreen
+import com.example.krosovki.screens.LoginScreen
 import com.example.krosovki.screens.MainScreen
 import com.example.krosovki.screens.SearchScreen
 import com.example.krosovki.screens.StartScreen
@@ -23,7 +23,7 @@ fun ScrensController() {
             }
         }
         composable("loginScreen"){
-            LogInScreen() {
+            LoginScreen {
                 navController.navigate("MainScreen")
             }
         }
