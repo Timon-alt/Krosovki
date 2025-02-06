@@ -82,8 +82,10 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.ktor:ktor-client-android:3.0.3")
     implementation("io.github.jan-tennert.supabase:auth-kt")
+    implementation("io.github.jan-tennert.supabase:storage-kt:3.1.1")
     implementation(libs.realtime.kt)
-    // Хэш паролей
-    //implementation(libs.jbcrypt)
+    // Библиотека Koil
+    implementation("io.coil-kt.coil3:coil-compose:3.1.0")
+
 
 }
