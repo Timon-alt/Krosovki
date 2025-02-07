@@ -48,6 +48,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import com.example.krosovki.R
 import com.example.krosovki.controllers.LogInController
 
@@ -239,6 +240,11 @@ fun LoginScreen(onClick: () -> Unit) {
         ) {
             Text(text = btnText)
         }
+        AsyncImage(
+            model = "https://s3-alpha-sig.figma.com/img/2c70/5924/fd56edd26a4546a27a004864553e05d9?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=RLR1OXbofsMTPJTZtWDPZ1voxmE-DYT4lo~I-X~yNqkK7L68pCVhnqIQjZlgYv3Lv0UkfJJP5teM12yh6tZOrVh6r2UfBHOgpAkw8VrrJ7T1PZvz1e2tlvku9-X9dNq3~iCqa6ad25t1q9JtxGuFyvQ~fnWrxJw73vnt5nRfdcI01-LA8fCWmx7ie1LNKfEdiqkpQ1~b7w7~FK4I98Vf2Q~02GinPOPFYoMhKsavxZt8V1ywy2rmHr8hOJTosUJ0fwBiHVmVu9PubXgDB5OOYoXqCixnajB1aveIJ0d-IUhO2~hjku7AH-T8Xnmt51eUc0H2PhnLeAiCZVRFf934xA__",
+            contentDescription = null,
+            modifier = Modifier.size(150.dp)
+        )
 
         Spacer(Modifier.size(209.dp))
 
