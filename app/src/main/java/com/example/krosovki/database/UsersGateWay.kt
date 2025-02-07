@@ -47,6 +47,11 @@ class UsersGateWay {
         }
     }
 
+    suspend fun getUserId() : String {
+        val user = supabase.auth.retrieveUserForCurrentSession(updateSession = true)
+        return user.id
+    }
+
     suspend fun createProfile(id: UUID, firstname: String?,
                               lastname: String?, phone: String?) : Boolean {
         return try {

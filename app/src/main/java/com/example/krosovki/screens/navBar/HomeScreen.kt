@@ -1,6 +1,7 @@
 package com.example.krosovki.screens.navBar
 
 import CardCheeeck
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -60,11 +61,15 @@ import androidx.compose.ui.text.withLink
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 import com.example.krosovki.R
+import com.example.krosovki.controllers.LogInController
 
 @Composable
 fun HomeScreen(onClick: () -> Unit){
     var search by remember { mutableStateOf("") }
+    val id = LogInController().userGetId()
+    Log.d("Msg", "$id")
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier

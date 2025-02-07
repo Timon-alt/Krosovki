@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.krosovki.components.MyAnimationsTest
 import com.example.krosovki.components.SlideMenuBar
 import com.example.krosovki.screens.DetailsScreen
 import com.example.krosovki.screens.EnterWithoutPass
@@ -44,6 +45,10 @@ fun ScrensController() {
         }
         composable("SlideBar"){
             SlideMenuBar {  }
+        }
+        // Тест анимаций
+        composable("AnimationsTest") {
+            MyAnimationsTest()
         }
 
     }

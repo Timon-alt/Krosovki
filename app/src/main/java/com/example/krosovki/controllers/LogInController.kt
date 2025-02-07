@@ -34,4 +34,12 @@ class LogInController {
         }
         return result
     }
+
+    fun userGetId() : String {
+        var result = ""
+        runBlocking {
+            result = user.getUserId()
+        }
+        return result
+    }
 }
