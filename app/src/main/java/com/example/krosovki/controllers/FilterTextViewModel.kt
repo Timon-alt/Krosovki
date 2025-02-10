@@ -1,4 +1,4 @@
-package com.example.krosovki.database
+package com.example.krosovki.controllers
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
