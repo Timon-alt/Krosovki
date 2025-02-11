@@ -17,7 +17,7 @@ import com.example.krosovki.screens.StartScreen
 fun ScrensController() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "loginScreen"){
+    NavHost(navController = navController, startDestination = "MainScreen"){
         composable("startScreen"){
             StartScreen() {
                 navController.navigate("LoginScreen")
