@@ -46,6 +46,8 @@ import com.example.krosovki.components.SneakersCard
 import com.example.krosovki.controllers.SneakersViewModel
 import com.example.krosovki.database.Sneakers
 import com.example.krosovki.screens.SneakerCard
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 @Composable
@@ -54,8 +56,10 @@ fun PopularScreen(navController: NavController, onClick: () -> Unit) {
     val viewModel: SneakersViewModel = viewModel()
 
     LaunchedEffect(Unit) {
-        // Запускаем загрузку данных при первом отображении
-        viewModel.loadSneakers()
+        withContext(Dispatchers.IO) {
+            // Запускаем загрузку данных при первом отображении
+            viewModel.loadSneakers()
+        }
     }
 
     val sneakers: List<Sneakers> by viewModel.snekaersList.collectAsState()
@@ -110,8 +114,10 @@ fun PopularScreen(navController: NavController, onClick: () -> Unit) {
                 columns = GridCells.Fixed(2),
                 modifier = Modifier
             ) {
-                items(sneakers) {sneaker ->
-                    SneakersCard(sneaker.name, sneaker.price, sneaker.image)
+                items(
+                    sneakers,
+                    key = { sneaker -> sneaker.id}) {sneaker ->
+                    SneakersCard(sneaker.name, sneaker.price, sneaker.image_url)
                 }
             }
         }

@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Sneakers(
-    val id: Int?,
+    val id: Int,
     val name: String,
     val price: Float,
-    val image: String
+    val image_url: String
 )
