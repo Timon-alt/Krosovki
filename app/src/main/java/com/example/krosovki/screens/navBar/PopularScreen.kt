@@ -27,16 +27,31 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.krosovki.components.SneakersCard
+import com.example.krosovki.controllers.SneakersViewModel
 
 @Composable
-fun PopularScreen(navController: NavController,onClick: () -> Unit){
+fun PopularScreen(navController: NavController,
+                  onClick: () -> Unit, viewModel: SneakersViewModel = viewModel()) {
+
+    LaunchedEffect(Unit) {
+        // Запускаем загрузку данных при первом отображении
+        viewModel.loadSneakers()
+    }
+
+    val sneakers by viewModel.snekaersList.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -87,9 +102,9 @@ fun PopularScreen(navController: NavController,onClick: () -> Unit){
                 columns = GridCells.Fixed(2),
                 modifier = Modifier
             ) {
-                items(count = 6){
-                    CardCheeeck()
-                }
+                //items(sneakers){ sneaker ->
+                //    SneakersCard(sneaker.name)
+                //}
             }
         }
 
