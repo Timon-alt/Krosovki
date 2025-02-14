@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class SneakersViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
+class SneakersViewModel() : ViewModel() {
 
     private val sneakersRepository = SneakersRepository()
 

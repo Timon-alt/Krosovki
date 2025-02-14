@@ -1,6 +1,7 @@
 package com.example.krosovki.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -145,17 +147,57 @@ fun SneakersCard(name: String, price: Float, image: String) {
 
 }
 
+@Composable
+fun CartCard(image: String, name: String, price: Float) {
+    Card(
+        shape = RoundedCornerShape(8.dp),
+        colors = CardColors(
+            contentColor = Color.Black,
+            disabledContentColor = Color.Transparent,
+            containerColor = Color.White,
+            disabledContainerColor = Color.Transparent
+        ),
+        modifier = Modifier
+            .width(267.dp)
+            .height(104.dp)
+
+
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(30.dp),
+            modifier = Modifier.fillMaxWidth()
+                .padding(10.dp)
+        ) {
+            Image(
+                painter = painterResource(R.drawable.card_krosovok),
+                contentDescription = "sneakers",
+                modifier = Modifier
+                    .size(85.dp)
+                    .background(
+                        color = colorResource(R.color.light_gray),
+                        shape = RoundedCornerShape(16.dp)
+                    )
+            )
+            Column {
+                Text(
+                    text = "Nike Club Max",
+                    fontSize = 16.sp
+                )
+
+                Spacer(Modifier.size(6.dp))
+
+                Text(
+                    text = "₽584.95",
+                    fontSize = 14.sp
+                )
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun PreviewCard() {
     var text by remember { mutableStateOf("") }
-    OutlinedTextField(
-        value = text,
-        onValueChange = { text = it },
-        colors = OutlinedTextFieldDefaults.colors(
-            unfocusedBorderColor = Color.Transparent,
-            disabledBorderColor = Color.Transparent
-        )
-
-    )
 }
