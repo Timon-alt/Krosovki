@@ -1,17 +1,25 @@
 package com.example.krosovki.database
 
-import io.github.jan.supabase.createSupabaseClient
-import io.github.jan.supabase.postgrest.Postgrest
+import androidx.lifecycle.LiveData
+import com.example.krosovki.screens.navBar.counter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class CartRepository {
-    private val supabase = createSupabaseClient(
-        supabaseUrl = "https://clkpilwlzctjicjnyrnj.supabase.co",
-        supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsa3BpbHdsemN0amljam55cm5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg1ODk5NzIsImV4cCI6MjA1NDE2NTk3Mn0.CQwfYEqybYlwtYwHx3v7Tg4Zy4oZ7XkOm--7UzGyEwQ"
-    ) {
-        install(Postgrest)
+class CartRepository(private val cartDao: CartDao) {
+    private val corountineScope = CoroutineScope(Dispatchers.Main)
+
+    val cartList: LiveData<List<Cart>> = cartDao.getAll()
+
+    fun addToCart(cart: Cart) {
+        corountineScope.launch {
+            cartDao.insertAll()
+        }
     }
 
-    suspend fun getCart(user_uid: String) {
-
+    fun deleteCartItem(cart: Cart) {
+        corountineScope.launch {
+            cartDao.delete(cart)
+        }
     }
 }
