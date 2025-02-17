@@ -10,8 +10,5 @@ import com.example.krosovki.database.Cart
 
 class CartViewModel() : ViewModel() {
 
-    private val db = Room.databaseBuilder(
-        applicationContext,
-        AppDatabase::class.java, "sneakersShop"
-    ).build()
+  //private val cartDatabase = AppDatabase.getInstance(application)
 }
