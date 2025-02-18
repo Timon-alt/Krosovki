@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     kotlin("plugin.serialization") version "2.0.0"
+    id("kotlin-kapt") // Добавляем плагин для kapt
 }
 
 android {
@@ -90,6 +91,11 @@ dependencies {
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
     implementation("io.coil-kt.coil3:coil-network-ktor2:3.1.0")
     implementation("io.coil-kt.coil3:coil-network-ktor3:3.1.0")
+    // Room components
+    implementation ("androidx.room:room-runtime:2.6.1") // Основная библиотека Room
+    implementation ("androidx.room:room-ktx:2.6.1") // Поддержка Kotlin Coroutines
+    kapt("androidx.room:room-compiler:2.6.1")
+
 
 
 

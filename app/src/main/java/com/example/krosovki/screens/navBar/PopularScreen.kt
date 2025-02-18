@@ -102,9 +102,9 @@ fun PopularScreen(navController: NavController,
                 columns = GridCells.Fixed(2),
                 modifier = Modifier
             ) {
-                //,items(sneakers){ sneaker ->
-                //,    SneakersCard(sneaker.name) htrh
-                //,}
+                //items(sneakers){ sneaker ->
+                //    SneakersCard(sneaker.name)
+                //}
             }
         }
 

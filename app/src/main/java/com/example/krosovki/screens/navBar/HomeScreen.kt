@@ -68,8 +68,7 @@ import com.example.krosovki.controllers.LogInController
 @Composable
 fun HomeScreen(onClick: () -> Unit){
     var search by remember { mutableStateOf("") }
-    val id = LogInController().userGetId()
-    Log.d("Msg", "$id")
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier

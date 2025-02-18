@@ -11,4 +11,6 @@
     <color name="sub_text_light">#D8D8D8</color>
     <color name="sub_text_dark">#707B81</color>
     <color name="light_gray">#F7F7F9</color>
+    <color name="hint">#6A6A6A</color>
+    <color name="white_blue">#DFEFFF</color>
 </resources>

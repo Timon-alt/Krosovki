@@ -1,5 +1,6 @@
 package com.example.krosovki.controllers
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.krosovki.database.Sneakers
@@ -8,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class SneakersViewModel : ViewModel() {
+class SneakersViewModel() : ViewModel() {
 
     private val sneakersRepository = SneakersRepository()
 
