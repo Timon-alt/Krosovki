@@ -1,5 +1,6 @@
 package com.example.krosovki.components
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -39,7 +40,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -48,8 +51,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.example.krosovki.R
+import com.example.krosovki.controllers.FavItemsViewModel
+import com.example.krosovki.database.FavItems
 import com.example.krosovki.screens.MyIconShape
 
 @Composable
@@ -86,10 +92,12 @@ fun NotificationCard() {
 }
 
 @Composable
-fun SneakersCard(name: String, price: Float, image: String) {
+fun SneakersCard(id: Int, name: String, price: Double, image: String) {
     var clicked by remember { mutableStateOf(false) }
     var icon = if (clicked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder
     var iconColor = if (clicked) Color(0xFFF87265) else Color.Black
+    val favItemsViewModel: FavItemsViewModel = viewModel()
+    val favItemsList = favItemsViewModel.favItems
 
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -112,6 +120,12 @@ fun SneakersCard(name: String, price: Float, image: String) {
                     ),
                     onClick = {
                         clicked = !clicked
+                        if (clicked) {
+                            favItemsViewModel.addItem(FavItems(id, name, price, image))
+                        } else {
+                            favItemsViewModel.deleteItem(FavItems(id, name, price, image))
+                        }
+
 
                     }) {
                     Icon(
@@ -155,7 +169,84 @@ fun SneakersCard(name: String, price: Float, image: String) {
 }
 
 @Composable
-fun CartCard(image: String, name: String, price: Float) {
+fun SneakersCardTrue(id: Int, name: String, price: Double, image: String) {
+    var clicked by remember { mutableStateOf(true) }
+    var icon = if (clicked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder
+    var iconColor = if (clicked) Color(0xFFF87265) else Color.Black
+    val favItemsViewModel: FavItemsViewModel = viewModel()
+    val favItemsList = favItemsViewModel.favItems
+
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        modifier = Modifier.width(160.dp)
+    ) {
+        Column(
+            verticalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier
+        ) {
+            Column(Modifier.padding(9.dp)) {
+                FilledTonalButton(
+                    shape = CircleShape,
+                    contentPadding = PaddingValues(0.dp),
+
+                    colors = ButtonColors(
+                        containerColor = Color(0xFFF7F7F9),
+                        disabledContainerColor = Color.Gray,
+                        contentColor = Color.Black,
+                        disabledContentColor = Color.Gray
+                    ),
+                    onClick = {
+                        clicked = !clicked
+                        if (clicked) {
+                            favItemsViewModel.addItem(FavItems(id, name, price, image))
+                        } else {
+                            favItemsViewModel.deleteItem(FavItems(id, name, price, image))
+                        }
+
+
+                    }) {
+                    Icon(
+                        icon, "Like",
+                        tint = iconColor
+                    )
+                }
+                AsyncImage(
+                    model = image,
+                    contentDescription = "Krosovok",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.height(70.dp)
+                )
+                Text(
+                    text = "BEST SELLER",
+                    color = Color(0xFF48B2E7),
+                    fontSize = 12.sp
+                )
+                Spacer(Modifier.size(8.dp))
+
+                Text(
+                    text = name,
+                    color = Color(0xFF6A6A6A),
+                    fontSize = 16.sp
+                )
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = " ₽ $price",
+                    modifier = Modifier.padding(9.dp)
+                )
+                MyIconShape()
+            }
+        }
+    }
+
+}
+
+@Composable
+fun CartCard(id: Int, name: String, price: Double, image: String) {
     Card(
         shape = RoundedCornerShape(8.dp),
         colors = CardColors(
@@ -382,8 +473,98 @@ fun CongratulationCard() {
         }
     }
 }
+
+@Composable
+fun PriceCard(price: Double) {
+    val priced by remember { mutableStateOf(price) }
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardColors(
+            contentColor = Color.Black,
+            disabledContentColor = Color.Transparent,
+            containerColor = Color.White,
+            disabledContainerColor = Color.Transparent
+        ),
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(20.dp)
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Сумма",
+                    fontSize = 16.sp,
+                    color = colorResource(R.color.sub_text_dark)
+                )
+                Text(
+                    text = "₽$price",
+                    fontSize = 16.sp
+                )
+            }
+
+            Spacer(Modifier.size(10.dp))
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Доставка",
+                    fontSize = 16.sp,
+                    color = colorResource(R.color.sub_text_dark)
+                )
+                Text(
+                    text = "₽60.20",
+                    fontSize = 16.sp
+                )
+            }
+
+            Spacer(Modifier.size(18.dp))
+
+            Canvas(modifier = Modifier.fillMaxWidth()) {
+                drawLine(
+                    start = Offset(x= 0f, y= 0f),
+                    end = Offset(x = size.width, y = 0f),
+                    color = Color.Gray,
+                    strokeWidth = 8.0f,
+                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(30f, 0f, 10f, 10f), phase = 0f)
+                )
+            }
+
+            Spacer(Modifier.size(18.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Итого",
+                    fontSize = 16.sp,
+                    color = Color.Black
+                )
+                Text(
+                    text = "₽${priced + 60.20}",
+                    fontSize = 16.sp
+                )
+            }
+
+            Spacer(Modifier.size(32.dp))
+
+            Button(
+                onClick = {},
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.width(335.dp).height(50.dp)
+            ) {
+                Text(text = "Оформить Заказ")
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun PreviewCard() {
-    CongratulationCard()
+    PriceCard(122.1)
 }

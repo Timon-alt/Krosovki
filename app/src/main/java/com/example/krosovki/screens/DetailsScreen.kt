@@ -160,7 +160,7 @@ fun DetailsScreen() {
                 FilledTonalButton(
                     shape = CircleShape,
                     contentPadding = PaddingValues(0.dp),
-                    modifier = Modifier.size(44.dp),
+                    modifier = Modifier.size(52.dp),
                     colors = ButtonColors(
                         containerColor = Color.White,
                         disabledContainerColor = Color.Gray,
@@ -175,8 +175,15 @@ fun DetailsScreen() {
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth().height(52.dp)
                 ) {
-                    Text(text = "В Корзину",
-                        color = Color.White)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(Icons.Outlined.ShoppingBag, "")
+
+                        Spacer(Modifier.size(70.dp))
+                        Text(text = "В корзину")
+                    }
                 }
 
             }

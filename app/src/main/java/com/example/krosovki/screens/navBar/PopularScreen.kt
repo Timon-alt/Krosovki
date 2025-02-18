@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -39,18 +40,15 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.krosovki.components.SneakersCard
+import com.example.krosovki.components.SneakersCardTrue
+import com.example.krosovki.controllers.FavItemsViewModel
 import com.example.krosovki.controllers.SneakersViewModel
 
 @Composable
-fun PopularScreen(navController: NavController,
-                  onClick: () -> Unit, viewModel: SneakersViewModel = viewModel()) {
+fun PopularScreen(navController: NavController, onClick: () -> Unit) {
 
-    LaunchedEffect(Unit) {
-        // Запускаем загрузку данных при первом отображении
-        viewModel.loadSneakers()
-    }
-
-    val sneakers by viewModel.snekaersList.collectAsState()
+    val favItemsViewModel: FavItemsViewModel = viewModel()
+    val favItemsList = favItemsViewModel.favItems
 
     Column(
         modifier = Modifier
@@ -102,9 +100,9 @@ fun PopularScreen(navController: NavController,
                 columns = GridCells.Fixed(2),
                 modifier = Modifier
             ) {
-                //items(sneakers){ sneaker ->
-                //    SneakersCard(sneaker.name)
-                //}
+                items(favItemsList) { item ->
+                    SneakersCardTrue(item.id, item.name, item.price, item.image_url)
+                }
             }
         }
 

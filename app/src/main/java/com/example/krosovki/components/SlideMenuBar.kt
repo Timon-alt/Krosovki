@@ -40,7 +40,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.example.krosovki.R
+import com.example.krosovki.navigation.bottomNavigation.NavGraph
+import com.example.krosovki.screens.navBar.BottomNavBar
+import com.example.krosovki.ui.theme.KrosovkiTheme
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,6 +53,7 @@ fun SlideMenuBar(
     content: @Composable (PaddingValues) -> Unit
 ) {
 
+    val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
@@ -122,27 +127,16 @@ fun SlideMenuBar(
             }
         }
     ) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text("Navigation Drawer Example") },
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            scope.launch {
-                                if (drawerState.isClosed) {
-                                    drawerState.open()
-                                } else {
-                                    drawerState.close()
-                                }
-                            }
-                        }) {
-                            Icon(Icons.Default.Menu, "Menu")
-                        }
-                    }
-                )
+        KrosovkiTheme {
+            Scaffold(
+                bottomBar = {
+                    BottomNavBar(navController = navController)
+                }
+
+            ) { innerPadding ->
+                content(innerPadding)
+                NavGraph(navHostController = navController)
             }
-        ) { innerPadding ->
-            content(innerPadding)
         }
     }
 }

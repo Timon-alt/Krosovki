@@ -35,6 +35,7 @@ import androidx.compose.material.icons.filled.ShoppingBag
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material.icons.outlined.FilterList
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.ShoppingBag
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
@@ -42,6 +43,7 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -51,6 +53,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
@@ -73,13 +76,14 @@ fun HomeScreen(onClick: () -> Unit){
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF7F7F9))
+            .background(color = colorResource(R.color.light_gray))
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth().padding(20.dp)
         ){
-            Icon(Icons.Filled.Menu, "Menu",
+            Icon(painter = painterResource(R.drawable.menuu), "Menu",
                 modifier = Modifier.size(37.dp))
             Text(text = "Главная", fontSize = 32.sp)
             FilledTonalButton(
@@ -98,23 +102,26 @@ fun HomeScreen(onClick: () -> Unit){
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth().padding(20.dp)){
-            TextField(
+            OutlinedTextField(
                 value = search,
-                onValueChange = {search = it},
+                onValueChange = { search = it},
                 placeholder = { Text(text = "Поиск") },
-                leadingIcon = {
-                    IconButton(onClick = {/*TODO*/}) {
-                        Icon(Icons.Filled.Search, "Search")
-                    }
-                },
                 shape = RoundedCornerShape(14.dp),
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color.White,
-                    focusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent,
-                    unfocusedLabelColor = Color.Red
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.Transparent,
+                    unfocusedBorderColor = Color.Transparent,
+                    disabledBorderColor = Color.Transparent
                 ),
-                modifier = Modifier.width(269.dp).height(52.dp)
+                leadingIcon = {
+                    Icon(Icons.Outlined.Search, "")
+                },
+                modifier = Modifier
+                    .height(48.dp)
+                    .width(269.dp)
+                    .background(
+                        color = Color.White,
+                        shape = RoundedCornerShape(14.dp)
+                    )
             )
             Spacer(Modifier.size(14.dp))
             FilledTonalButton(
@@ -129,7 +136,7 @@ fun HomeScreen(onClick: () -> Unit){
                 contentPadding = PaddingValues(0.dp),
                 modifier = Modifier.size(52.dp)
             ) {
-                Icon(Icons.Outlined.FilterList, "Filter",
+                Icon(painter = painterResource(R.drawable.settings), "Filter",
                     tint = Color.White)
             }
 
