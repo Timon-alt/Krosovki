@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -42,9 +43,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.krosovki.R
+import com.example.krosovki.components.SneakersCardTrue
+import com.example.krosovki.controllers.FavItemsViewModel
 import com.example.krosovki.screens.MyIconShape
 
 var counterr = 4
@@ -52,6 +56,9 @@ var counterr = 4
 @Composable
 fun LikedScreen(navController: NavController){
     var counter by remember { mutableStateOf(counterr) }
+    val favItemsViewModel: FavItemsViewModel = viewModel()
+    val favItemsList = favItemsViewModel.favItems
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -103,8 +110,8 @@ fun LikedScreen(navController: NavController){
                 columns = GridCells.Fixed(2),
                 modifier = Modifier
             ) {
-                items(count = counter) {
-                    LikedCard()
+                items(favItemsList) { item ->
+                    SneakersCardTrue(item.id, item.name, item.price, item.image_url)
                 }
             }
         }

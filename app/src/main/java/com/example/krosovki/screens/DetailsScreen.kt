@@ -2,6 +2,7 @@ package com.example.krosovki.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -30,24 +33,37 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.krosovki.R
 
+
 val sneakersList = listOf(
     R.drawable.card_krosovok_two,
     R.drawable.card_krosovok_three,
     R.drawable.card_krosovok_four,
+    R.drawable.card_krosovok,
     R.drawable.card_krosovok_five,
 )
 
 @Composable
 fun DetailsScreen() {
+    val pagerState = rememberPagerState(pageCount = {
+        sneakersList.size
+    })
+    val clicked = remember { mutableStateOf(false) }
+    val lines = if(!clicked.value) 3 else 8
+
     Column(
         verticalArrangement = Arrangement.spacedBy(13.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -114,11 +130,14 @@ fun DetailsScreen() {
             )
         }
 
-        Image(
-            painter = painterResource(R.drawable.card_krosovok),
-            contentDescription = "Krosovok",
-            modifier = Modifier.size(241.dp)
-        )
+        HorizontalPager(state = pagerState, verticalAlignment = Alignment.CenterVertically) {page ->
+            Image(
+                painter = painterResource(sneakersList[page]),
+                contentDescription = "",
+                alignment = Alignment.Center,
+                modifier = Modifier.fillMaxWidth().height(250.dp)
+            )
+        }
 
         Column(
             modifier = Modifier.padding(20.dp)
@@ -136,8 +155,8 @@ fun DetailsScreen() {
 
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    text = "Вставка Max Air 270 Обеспечивает Непревзойдённый Комфорт В Течение Всего" +
-                            "Дня. Изящный Дизайн.....",
+                    text = stringResource(R.string.desc_text_exmp),
+                    maxLines = lines,
                     color = Color.Gray,
                     modifier = Modifier.width(335.dp)
                 )
@@ -146,7 +165,10 @@ fun DetailsScreen() {
                     modifier = Modifier.fillMaxWidth()) {
                     Text(
                         text = "Подробнее",
-                        color = Color(0xFF48B2E7)
+                        color = Color(0xFF48B2E7),
+                        modifier = Modifier.clickable {
+                            clicked.value = !clicked.value
+                        }
                     )
                 }
             }
@@ -182,7 +204,9 @@ fun DetailsScreen() {
                         Icon(Icons.Outlined.ShoppingBag, "")
 
                         Spacer(Modifier.size(70.dp))
-                        Text(text = "В корзину")
+                        Text(
+                            text = "В корзину",
+                            color = Color.White)
                     }
                 }
 

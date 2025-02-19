@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
@@ -46,6 +48,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -64,13 +68,27 @@ import androidx.compose.ui.text.withLink
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 import com.example.krosovki.R
+import com.example.krosovki.components.SneakersCard
 import com.example.krosovki.controllers.LogInController
+import com.example.krosovki.controllers.SneakersViewModel
+import com.example.krosovki.screens.SneakerCard
+import com.example.krosovki.screens.sneakersList
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun HomeScreen(onClick: () -> Unit){
     var search by remember { mutableStateOf("") }
+    val sneakersViewModel: SneakersViewModel = viewModel()
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            sneakersViewModel.loadSneakers()
+        }
+    }
+    val sneakersList by sneakersViewModel.snekaersList.collectAsState()
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -188,12 +206,12 @@ fun HomeScreen(onClick: () -> Unit){
                 color = Color(0xFF48B2E7),
                 modifier = Modifier.clickable { onClick() })
         }
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth().padding(20.dp)
-        ) {
-            CardCheeeck()
-            CardCheeeck()
+        LazyRow {
+            items(
+                sneakersList,
+                key = {sneaker -> sneaker.id}) { sneaker ->
+                SneakersCard(sneaker.id, sneaker.name, sneaker.price, sneaker.image_url)
+            }
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,

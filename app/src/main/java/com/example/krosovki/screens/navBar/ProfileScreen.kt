@@ -89,18 +89,23 @@ fun ProfileScreen(){
                         text = "Профиль",
                         textAlign = TextAlign.Center,
                         fontSize = 16.sp)
-                    Icon(
-                        Icons.Filled.Edit,
-                        "Edit",
-                        tint = Color.White,
+                    Box(
+                        contentAlignment = Alignment.Center,
                         modifier = Modifier
-                            .size(30.dp)
+                            .size(25.dp)
                             .background(
-                                color = Color(0xFF48B2E7),
-                                shape = CircleShape
-                            )
-                            .clickable { visible.value = !visible.value }
-                    )
+                                color = colorResource(R.color.Accent),
+                                shape = CircleShape)
+                    ) {
+                        Icon(
+                            Icons.Filled.Edit,
+                            "Edit",
+                            tint = Color.White,
+                            modifier = Modifier
+                                .size(14.dp)
+                                .clickable { visible.value = !visible.value }
+                        )
+                    }
                 }
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {

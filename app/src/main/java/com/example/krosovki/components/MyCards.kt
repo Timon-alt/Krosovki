@@ -441,17 +441,23 @@ fun CongratulationCard() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            Image(
-                painter = painterResource(R.drawable.congrat),
-                contentDescription = "",
-
+            Box(
+                contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .size(86.dp)
+                    .size(134.dp)
                     .background(
                         color = colorResource(R.color.white_blue),
-                        shape = CircleShape
-                    )
-            )
+                        shape = CircleShape)
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.congrat),
+                    contentDescription = "",
+
+                    modifier = Modifier
+                        .size(86.dp)
+
+                )
+            }
 
             Spacer(Modifier.size(24.dp))
 
@@ -566,5 +572,5 @@ fun PriceCard(price: Double) {
 @Preview
 @Composable
 fun PreviewCard() {
-    PriceCard(122.1)
+    CongratulationCard()
 }

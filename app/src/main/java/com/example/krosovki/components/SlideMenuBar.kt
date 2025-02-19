@@ -97,7 +97,7 @@ fun SlideMenuBar(
                         onClick = {}
                     )
                     NavigationDrawerItem(
-                        icon = { Icon(Icons.Outlined.DeliveryDining, "Deliver") },
+                        icon = { Icon(painter = painterResource(R.drawable.orders), "Deliver") },
                         label = { Text(text = "Заказы") },
                         selected = false,
                         onClick = {}
@@ -118,7 +118,7 @@ fun SlideMenuBar(
                     HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
                     NavigationDrawerItem(
-                        icon = { Icon(Icons.Outlined.Logout, "Logout") },
+                        icon = { Icon(painter = painterResource(R.drawable.logout), "Logout") },
                         label = {  Text(text = "Выйти") },
                         selected = false,
                         onClick = {}

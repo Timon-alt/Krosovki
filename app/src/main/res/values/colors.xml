@@ -13,4 +13,5 @@
     <color name="light_gray">#F7F7F9</color>
     <color name="hint">#6A6A6A</color>
     <color name="white_blue">#DFEFFF</color>
+    <color name="grey_dark">#D9D9D966</color>
 </resources>
