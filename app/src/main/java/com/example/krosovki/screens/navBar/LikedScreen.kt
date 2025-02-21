@@ -1,6 +1,7 @@
 package com.example.krosovki.screens.navBar
 
 import CardCheeeck
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -58,6 +59,7 @@ fun LikedScreen(navController: NavController){
     var counter by remember { mutableStateOf(counterr) }
     val favItemsViewModel: FavItemsViewModel = viewModel()
     val favItemsList = favItemsViewModel.favItems
+    Log.d("FavItemsList", "Items: ${favItemsList.size}")
 
     Column(
         modifier = Modifier
@@ -113,73 +115,6 @@ fun LikedScreen(navController: NavController){
                 items(favItemsList) { item ->
                     SneakersCardTrue(item.id, item.name, item.price, item.image_url)
                 }
-            }
-        }
-    }
-}
-
-@Composable
-fun counter(): Int{
-    var counter by remember { mutableStateOf(4) }
-    return counter
-}
-
-@Composable
-fun LikedCard(){
-    var clicked by remember { mutableStateOf(false) }
-
-
-    Card(
-        shape = RoundedCornerShape(16.dp),
-        modifier = Modifier.width(160.dp)
-    ) {
-        Column(verticalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier) {
-            Column(Modifier.padding(9.dp)) {
-                FilledTonalButton(
-                    shape = CircleShape,
-                    contentPadding = PaddingValues(0.dp),
-
-                    colors = ButtonColors(
-                        containerColor = Color(0xFFF7F7F9),
-                        disabledContainerColor = Color.Gray,
-                        contentColor = Color.Black,
-                        disabledContentColor = Color.Gray
-                    ),
-                    onClick = {
-                        clicked = !clicked
-                        if(clicked) counterr--
-
-                    }) {
-                    androidx.compose.material.Icon(Icons.Filled.Favorite, "Like",
-                        tint = Color(0xFFF87265))
-                }
-                Image(
-                    painter = painterResource(R.drawable.card_krosovok),
-                    contentDescription = "Krosovok",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.height(70.dp)
-                )
-                androidx.compose.material3.Text(
-                    text = "BEST SELLER",
-                    color = Color(0xFF48B2E7),
-                    fontSize = 12.sp)
-                Spacer(Modifier.size(8.dp))
-
-                androidx.compose.material3.Text(
-                    text = "Nike Air Max",
-                    color = Color(0xFF6A6A6A),
-                    fontSize = 16.sp)
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                androidx.compose.material3.Text(
-                    text = " ₽ 752.00",
-                    modifier = Modifier.padding(9.dp))
-                MyIconShape()
             }
         }
     }

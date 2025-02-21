@@ -1,5 +1,6 @@
 package com.example.krosovki.components
 
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,6 +35,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -122,8 +124,10 @@ fun SneakersCard(id: Int, name: String, price: Double, image: String) {
                         clicked = !clicked
                         if (clicked) {
                             favItemsViewModel.addItem(FavItems(id, name, price, image))
+                            Log.d("LikeBut", "Товар добавлен в избранное")
                         } else {
                             favItemsViewModel.deleteItem(FavItems(id, name, price, image))
+                            Log.d("LikeBut", "Товар удалён из избранного")
                         }
 
 
@@ -170,11 +174,18 @@ fun SneakersCard(id: Int, name: String, price: Double, image: String) {
 
 @Composable
 fun SneakersCardTrue(id: Int, name: String, price: Double, image: String) {
-    var clicked by remember { mutableStateOf(true) }
-    var icon = if (clicked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder
-    var iconColor = if (clicked) Color(0xFFF87265) else Color.Black
+
     val favItemsViewModel: FavItemsViewModel = viewModel()
-    val favItemsList = favItemsViewModel.favItems
+    val isLiked = favItemsViewModel.favItems.any { it.id == id }
+    var clicked by remember { mutableStateOf(isLiked) }
+
+    LaunchedEffect(clicked) {
+        if (clicked) {
+            favItemsViewModel.addItem(FavItems(id, name, price, image))
+        } else {
+            favItemsViewModel.deleteItem(FavItems(id, name, price, image))
+        }
+    }
 
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -199,15 +210,18 @@ fun SneakersCardTrue(id: Int, name: String, price: Double, image: String) {
                         clicked = !clicked
                         if (clicked) {
                             favItemsViewModel.addItem(FavItems(id, name, price, image))
+                            Log.d("LikeCard", "Товар добавлен в избранное")
                         } else {
                             favItemsViewModel.deleteItem(FavItems(id, name, price, image))
+                            Log.d("Like", "Товар удалён из избранного")
                         }
 
 
                     }) {
                     Icon(
-                        icon, "Like",
-                        tint = iconColor
+                        if (clicked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                        "Like",
+                        tint = if (clicked) Color(0xFFF87265) else Color.Black
                     )
                 }
                 AsyncImage(
